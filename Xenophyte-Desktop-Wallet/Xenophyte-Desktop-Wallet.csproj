@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC906F1F-C934-48E4-9CB8-8F8438237EE3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Xenophyte_Wallet</RootNamespace>
+    <AssemblyName>Xenophyte-Desktop-Wallet</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Xenophyte_Wallet.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WINDOWS|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WINDOWS\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LINUX|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\LINUX\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WINDOWS-RELEASE|AnyCPU'">
+    <OutputPath>bin\WINDOWS-RELEASE\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LINUX-RELEASE|AnyCPU'">
+    <OutputPath>bin\LINUX-RELEASE\</OutputPath>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>7.3</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo-web-profil.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\metroframework-modern-ui-master\MetroFramework.Fonts\bin\Release\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xenophyte-Connector-All">
+      <HintPath>..\..\Xenophyte-Connector-All\Xenophyte-Connector-All\bin\Release\Xenophyte-Connector-All.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=0.16.4.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.Net.0.16.4\lib\net461\zxing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\ClassContact.cs" />
+    <Compile Include="Debug\ClassLog.cs" />
+    <Compile Include="Debug\ClassMemory.cs" />
+    <Compile Include="Features\ClassPeerList.cs" />
+    <Compile Include="Features\ClassTranslation.cs" />
+    <Compile Include="Utility\ClassUtility.cs" />
+    <Compile Include="Wallet\Sync\ClassWalletTransactionType.cs" />
+    <Compile Include="Wallet\Tcp\Option\ClassWalletRestoreFunctions.cs" />
+    <Compile Include="Wallet\Setting\ClassWalletSetting.cs" />
+    <Compile Include="FormCustom\ClassLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ClassFormPhase.cs" />
+    <Compile Include="FormPhase\ClassParallelForm.cs" />
+    <Compile Include="FormPhase\MainForm\BlockExplorerWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\BlockExplorerWallet.Designer.cs">
+      <DependentUpon>BlockExplorerWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\ContactWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\ContactWallet.Designer.cs">
+      <DependentUpon>ContactWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\CreateWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\CreateWallet.Designer.cs">
+      <DependentUpon>CreateWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\OverviewWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\OverviewWallet.Designer.cs">
+      <DependentUpon>OverviewWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\RestoreWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\RestoreWallet.Designer.cs">
+      <DependentUpon>RestoreWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\SendTransactionWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\SendTransactionWallet.Designer.cs">
+      <DependentUpon>SendTransactionWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\TransactionHistoryWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\TransactionHistoryWallet.Designer.cs">
+      <DependentUpon>TransactionHistoryWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\AboutWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\AboutWallet.Designer.cs">
+      <DependentUpon>AboutWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\AddContactWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\AddContactWallet.Designer.cs">
+      <DependentUpon>AddContactWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\ChangeWalletPasswordWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\ChangeWalletPasswordWallet.Designer.cs">
+      <DependentUpon>ChangeWalletPasswordWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\CreateWalletSuccessFormWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\CreateWalletSuccessFormWallet.Designer.cs">
+      <DependentUpon>CreateWalletSuccessFormWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\MainWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\MainWallet.Designer.cs">
+      <DependentUpon>MainWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\OpenWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\MainForm\OpenWallet.Designer.cs">
+      <DependentUpon>OpenWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\FirstStartWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\FirstStartWallet.Designer.cs">
+      <DependentUpon>FirstStartWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\PinCodeSettingWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\PinCodeSettingWallet.Designer.cs">
+      <DependentUpon>PinCodeSettingWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\PinFormWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\PinFormWallet.Designer.cs">
+      <DependentUpon>PinFormWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\RemoteNodeSettingWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\RemoteNodeSettingWallet.Designer.cs">
+      <DependentUpon>RemoteNodeSettingWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\SearchWalletExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\SearchWalletExplorer.Designer.cs">
+      <DependentUpon>SearchWalletExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\WaitingFormReconnectWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\WaitingFormReconnectWallet.Designer.cs">
+      <DependentUpon>WaitingFormReconnectWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\WaitingFormWallet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhase\ParallelForm\WaitingFormWallet.Designer.cs">
+      <DependentUpon>WaitingFormWallet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCustom\ClassPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utility\LinuxClipboard.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="WaitingCreateWalletForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitingCreateWalletForm.Designer.cs">
+      <DependentUpon>WaitingCreateWalletForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Wallet\Sync\ClassBlockCache.cs" />
+    <Compile Include="Wallet\Sync\Object\ClassBlockObject.cs" />
+    <Compile Include="Wallet\Sync\ClassWalletTransactionAnonymityCache.cs" />
+    <Compile Include="Wallet\Sync\ClassWalletTransactionCache.cs" />
+    <Compile Include="Xenophyte-Wallet-Interface.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Xenophyte-Wallet-Interface.Designer.cs">
+      <DependentUpon>Xenophyte-Wallet-Interface.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wallet\Tcp\ClassWalletObject.cs" />
+    <EmbeddedResource Include="FormPhase\MainForm\BlockExplorerWallet.resx">
+      <DependentUpon>BlockExplorerWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\ContactWallet.resx">
+      <DependentUpon>ContactWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\CreateWallet.resx">
+      <DependentUpon>CreateWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\OverviewWallet.resx">
+      <DependentUpon>OverviewWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\RestoreWallet.resx">
+      <DependentUpon>RestoreWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\SendTransactionWallet.resx">
+      <DependentUpon>SendTransactionWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\TransactionHistoryWallet.resx">
+      <DependentUpon>TransactionHistoryWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\AboutWallet.resx">
+      <DependentUpon>AboutWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\AddContactWallet.resx">
+      <DependentUpon>AddContactWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\ChangeWalletPasswordWallet.resx">
+      <DependentUpon>ChangeWalletPasswordWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\CreateWalletSuccessFormWallet.resx">
+      <DependentUpon>CreateWalletSuccessFormWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\MainWallet.resx">
+      <DependentUpon>MainWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\MainForm\OpenWallet.resx">
+      <DependentUpon>OpenWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\FirstStartWallet.resx">
+      <DependentUpon>FirstStartWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\PinCodeSettingWallet.resx">
+      <DependentUpon>PinCodeSettingWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\PinFormWallet.resx">
+      <DependentUpon>PinFormWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\RemoteNodeSettingWallet.resx">
+      <DependentUpon>RemoteNodeSettingWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\SearchWalletExplorer.resx">
+      <DependentUpon>SearchWalletExplorer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\WaitingFormReconnectWallet.resx">
+      <DependentUpon>WaitingFormReconnectWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhase\ParallelForm\WaitingFormWallet.resx">
+      <DependentUpon>WaitingFormWallet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="WaitingCreateWalletForm.resx">
+      <DependentUpon>WaitingCreateWalletForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xenophyte-Wallet-Interface.resx">
+      <DependentUpon>Xenophyte-Wallet-Interface.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logo-web-profil.ico" />
+    <Compile Include="Wallet\Sync\Object\ClassWalletTransactionObject.cs" />
+    <None Include="Resources\valid.png" />
+    <None Include="Resources\error.png" />
+    <None Include="Resources\logo-web-transparent.png" />
+    <None Include="Resources\logo-web-profil.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
