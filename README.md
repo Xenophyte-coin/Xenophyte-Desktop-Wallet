@@ -33,7 +33,7 @@ mkbundle --cross 4.6.1-linux-libc2.12-amd64 Xenophyte-Wallet.exe -o Xenophyte-Wa
 
 Informations:
 
-- Xenophyte wallet gui provide the possibility to get your current balance without to be sync at 100%.
+- Xenophyte Desktop Wallet gui provide the possibility to get your current balance without to be sync at 100%.
 
 - You can send/receive transaction without to be sync at 100%.
 
