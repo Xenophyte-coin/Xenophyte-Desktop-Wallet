@@ -57,7 +57,7 @@ For more informations about how work the network connection of wallet, please ch
 
 **Be sure to compile in release mode those source for don't enable Log System of the wallet**
 
-**Xenophyte-Connector-All Library is required for compile the gui wallet: https://github.com/Xenophyte/Xenophyte-Connector-All**
+**Xenophyte-Connector-All Library is required for compile the gui wallet: https://github.com/Xenophyte-coin/Xenophyte-Connector-All**
 
 **Developers:**
 
