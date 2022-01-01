@@ -1,4 +1,5 @@
 Xenophyte-Desktop-Wallet
+
 This is the official Xenophyte Desktop Wallet compatible with Netframework 4.6.1 minimum or Mono.
 
 In production, we suggest compiling the wallet in Release Mode for disabling log files.
@@ -16,12 +17,20 @@ For compile the project Mono is required, you can also compile the project with 
 
 For make a binary linux file from executable windows file:
 
+``
 mkbundle --list-targets // Give the list of all target runtime
+``
+
 Example of target: 4.6.1-linux-libc2.12-amd64
 
+``
 mkbundle --fetch-target 4.6.1-linux-libc2.12-amd64 // Functional for Ubuntu 18.04 64bits
+``
 
+``
 mkbundle --cross 4.6.1-linux-libc2.12-amd64 Xenophyte-Desktop-Wallet.exe -o Xenophyte-Desktop-Wallet Xenophyte-Connector-All.dll  MetroFramework.dll zxing.dll  --deps -z --static
+``
+
 Informations:
 
 Xenophyte wallet gui provide the possibility to get your current balance without to be sync at 100%.
