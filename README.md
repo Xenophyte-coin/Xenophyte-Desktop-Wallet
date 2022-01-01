@@ -1,4 +1,4 @@
-# Xenophyte-Wallet
+# Xenophyte-Desktop-Wallet
 
 This is the official Xenophyte Desktop Wallet compatible with Netframework 4.6.1 minimum or Mono.
 
