@@ -28,7 +28,7 @@ Example of target: 4.6.1-linux-libc2.12-amd64
 ~~~text
 mkbundle --fetch-target 4.6.1-linux-libc2.12-amd64 // Functional for Ubuntu 18.04 64bits
 
-mkbundle --cross 4.6.1-linux-libc2.12-amd64 Xenophyte-Wallet.exe -o Xenophyte-Wallet Xenophyte-Connector-All.dll  MetroFramework.dll zxing.dll  --deps -z --static
+mkbundle --cross 4.6.1-linux-libc2.12-amd64 Xenophyte-Desktop-Wallet.exe -o Xenophyte-Desktop-Wallet Xenophyte-Connector-All.dll  MetroFramework.dll zxing.dll  --deps -z --static
 ~~~
 
 Informations:
