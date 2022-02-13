@@ -45,7 +45,7 @@ namespace Xenophyte_Wallet.FormPhase.MainForm
             var saveFileDialogWallet = new SaveFileDialog
             {
                 InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
-                Filter = @"Wallet File (*.xeno) | *.xeno",
+                Filter = "Xenophyte Wallet (*.xeno) | *.xeno",
                 FilterIndex = 2,
                 RestoreDirectory = true
             };

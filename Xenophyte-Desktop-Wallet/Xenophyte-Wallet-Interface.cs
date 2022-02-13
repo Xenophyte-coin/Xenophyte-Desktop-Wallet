@@ -93,7 +93,7 @@ namespace Xenophyte_Wallet
         public List<Tuple<Size, Point>> ListControlSizeContactWallet = new List<Tuple<Size, Point>>();
 
 
- 
+
         private const int ThreadUpdateNetworkStatsInterval = 1000;
         public int MaxTransactionPerPage = 100;
         public int MaxBlockPerPage = 100;
@@ -334,42 +334,42 @@ namespace Xenophyte_Wallet
         /// </summary>
         private void HideAllFormAsync()
         {
-            BeginInvoke((MethodInvoker) delegate
-            {
-                MainWalletForm.Hide();
+            BeginInvoke((MethodInvoker)delegate
+           {
+               MainWalletForm.Hide();
 
-                panelMainForm.Controls.Clear();
+               panelMainForm.Controls.Clear();
 
-                OpenWalletForm.Hide();
+               OpenWalletForm.Hide();
 
-                OverviewWalletForm.Hide();
+               OverviewWalletForm.Hide();
 
-                TransactionHistoryWalletForm.Hide();
+               TransactionHistoryWalletForm.Hide();
 
-                SendTransactionWalletForm.Hide();
+               SendTransactionWalletForm.Hide();
 
-                BlockWalletForm.Hide();
+               BlockWalletForm.Hide();
 
-                RestoreWalletForm.Hide();
+               RestoreWalletForm.Hide();
 
-                ContactWalletForm.Hide();
+               ContactWalletForm.Hide();
 
-                buttonPreviousPage.Hide();
+               buttonPreviousPage.Hide();
 
-                buttonNextPage.Hide();
+               buttonNextPage.Hide();
 
-                buttonFirstPage.Hide();
+               buttonFirstPage.Hide();
 
-                buttonLastPage.Hide();
+               buttonLastPage.Hide();
 
-                labelNoticeCurrentPage.Hide();
+               labelNoticeCurrentPage.Hide();
 
-                buttonResearch.Hide();
+               buttonResearch.Hide();
 
-                textBoxResearch.Hide();
+               textBoxResearch.Hide();
 
-                UpdateStyles();
-            });
+               UpdateStyles();
+           });
         }
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace Xenophyte_Wallet
         /// <param name="e"></param>
         private void LanguageSubMenuItem_Click(object sender, EventArgs e)
         {
-            var tooltipitem = (ToolStripItem) sender;
+            var tooltipitem = (ToolStripItem)sender;
             if (ClassTranslation.ChangeCurrentLanguage(tooltipitem.Text))
             {
                 ClassWalletSetting.SaveSetting();
@@ -968,7 +968,7 @@ namespace Xenophyte_Wallet
                     if (ClassWalletObject.SeedNodeConnectorWallet != null)
                         if (ClassWalletObject.SeedNodeConnectorWallet.ReturnStatus() &&
                             ClassWalletObject.WalletConnect.WalletPhase != ClassWalletPhase.Create)
-                           await ClassWalletObject.FullDisconnection(true);
+                            await ClassWalletObject.FullDisconnection(true);
                 }
             }
 
@@ -1120,7 +1120,7 @@ namespace Xenophyte_Wallet
         /// <param name="e"></param>
         private void TimerRefresh_Tick(object sender, EventArgs e)
         {
-            
+
             if (Width < BaseInterfaceWidth)
                 Width = BaseInterfaceWidth;
             else if (Width == BaseInterfaceWidth) Width += 10;
@@ -1198,7 +1198,7 @@ namespace Xenophyte_Wallet
                     if (ClassWalletObject.WalletConnect.WalletPhase != ClassWalletPhase.Create)
                     {
                         var changeWalletPassword = new ChangeWalletPasswordWallet
-                            {StartPosition = FormStartPosition.CenterParent};
+                        { StartPosition = FormStartPosition.CenterParent };
                         changeWalletPassword.ShowDialog(this);
                     }
         }
@@ -1214,7 +1214,7 @@ namespace Xenophyte_Wallet
                 if (ClassWalletObject.WalletConnect != null)
                     if (ClassWalletObject.WalletConnect.WalletPhase != ClassWalletPhase.Create)
                     {
-                        var pinCodeSetting = new PinCodeSettingWallet {StartPosition = FormStartPosition.CenterParent};
+                        var pinCodeSetting = new PinCodeSettingWallet { StartPosition = FormStartPosition.CenterParent };
                         pinCodeSetting.ShowDialog(this);
                     }
         }
@@ -1277,7 +1277,7 @@ namespace Xenophyte_Wallet
         /// <param name="e"></param>
         private void remoteNodeSettingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var remoteNodeSetting = new RemoteNodeSettingWallet {StartPosition = FormStartPosition.CenterParent};
+            var remoteNodeSetting = new RemoteNodeSettingWallet { StartPosition = FormStartPosition.CenterParent };
             remoteNodeSetting.ShowDialog(this);
         }
 
@@ -1515,9 +1515,9 @@ namespace Xenophyte_Wallet
             }
             else if (ClassFormPhase.FormPhase == ClassFormPhaseEnumeration.BlockExplorer)
             {
-                var numberMaxPage = (float) (ClassBlockCache.ListBlock.Count - 1) / MaxBlockPerPage;
+                var numberMaxPage = (float)(ClassBlockCache.ListBlock.Count - 1) / MaxBlockPerPage;
                 numberMaxPage += 0.5f;
-                numberMaxPage = (float) Math.Round(numberMaxPage, 0);
+                numberMaxPage = (float)Math.Round(numberMaxPage, 0);
                 if (numberMaxPage <= 0) numberMaxPage = 1;
                 if (CurrentBlockExplorerPage + 1 <= numberMaxPage)
                 {
@@ -1602,11 +1602,11 @@ namespace Xenophyte_Wallet
                     if (TransactionHistoryWalletForm.tabPageNormalTransactionSend.Visible
                     ) // Normal transaction send list
                     {
-                        var numberParge = (float) TotalTransactionNormalSend / MaxTransactionPerPage;
+                        var numberParge = (float)TotalTransactionNormalSend / MaxTransactionPerPage;
                         numberParge += 0.5f;
-                        numberParge = (float) Math.Round(numberParge, 0);
+                        numberParge = (float)Math.Round(numberParge, 0);
                         if (numberParge <= 0) numberParge = 1;
-                        CurrentTransactionHistoryPageNormalSend = (int) numberParge;
+                        CurrentTransactionHistoryPageNormalSend = (int)numberParge;
                         labelNoticeCurrentPage.Text = "" + CurrentTransactionHistoryPageNormalSend;
                         CleanTransactionHistory();
                     }
@@ -1614,11 +1614,11 @@ namespace Xenophyte_Wallet
                     if (TransactionHistoryWalletForm.tabPageNormalTransactionReceived.Visible
                     ) // Normal transaction received list
                     {
-                        var numberParge = (float) TotalTransactionNormalReceived / MaxTransactionPerPage;
+                        var numberParge = (float)TotalTransactionNormalReceived / MaxTransactionPerPage;
                         numberParge += 0.5f;
-                        numberParge = (float) Math.Round(numberParge, 0);
+                        numberParge = (float)Math.Round(numberParge, 0);
                         if (numberParge <= 0) numberParge = 1;
-                        CurrentTransactionHistoryPageNormalReceive = (int) numberParge;
+                        CurrentTransactionHistoryPageNormalReceive = (int)numberParge;
                         labelNoticeCurrentPage.Text = "" + CurrentTransactionHistoryPageNormalReceive;
                         CleanTransactionHistory();
                     }
@@ -1626,11 +1626,11 @@ namespace Xenophyte_Wallet
                     if (TransactionHistoryWalletForm.tabPageAnonymityTransactionSend.Visible
                     ) // Anonymous transaction send list 
                     {
-                        var numberParge = (float) TotalTransactionAnonymousSend / MaxTransactionPerPage;
+                        var numberParge = (float)TotalTransactionAnonymousSend / MaxTransactionPerPage;
                         numberParge += 0.5f;
-                        numberParge = (float) Math.Round(numberParge, 0);
+                        numberParge = (float)Math.Round(numberParge, 0);
                         if (numberParge <= 0) numberParge = 1;
-                        CurrentTransactionHistoryPageAnonymousSend = (int) numberParge;
+                        CurrentTransactionHistoryPageAnonymousSend = (int)numberParge;
                         labelNoticeCurrentPage.Text = "" + CurrentTransactionHistoryPageAnonymousSend;
                         CleanTransactionHistory();
                     }
@@ -1638,11 +1638,11 @@ namespace Xenophyte_Wallet
                     if (TransactionHistoryWalletForm.tabPageAnonymityTransactionReceived.Visible
                     ) // Anonymous transaction received list 
                     {
-                        var numberParge = (float) TotalTransactionAnonymousReceived / MaxTransactionPerPage;
+                        var numberParge = (float)TotalTransactionAnonymousReceived / MaxTransactionPerPage;
                         numberParge += 0.5f;
-                        numberParge = (float) Math.Round(numberParge, 0);
+                        numberParge = (float)Math.Round(numberParge, 0);
                         if (numberParge <= 0) numberParge = 1;
-                        CurrentTransactionHistoryPageAnonymousReceived = (int) numberParge;
+                        CurrentTransactionHistoryPageAnonymousReceived = (int)numberParge;
                         labelNoticeCurrentPage.Text = "" + CurrentTransactionHistoryPageAnonymousReceived;
                         CleanTransactionHistory();
                     }
@@ -1650,11 +1650,11 @@ namespace Xenophyte_Wallet
                     if (TransactionHistoryWalletForm.tabPageBlockRewardTransaction.Visible
                     ) // block reward transaction list 
                     {
-                        var numberParge = (float) TotalTransactionBlockReward / MaxTransactionPerPage;
+                        var numberParge = (float)TotalTransactionBlockReward / MaxTransactionPerPage;
                         numberParge += 0.5f;
-                        numberParge = (float) Math.Round(numberParge, 0);
+                        numberParge = (float)Math.Round(numberParge, 0);
                         if (numberParge <= 0) numberParge = 1;
-                        CurrentTransactionHistoryPageBlockReward = (int) numberParge;
+                        CurrentTransactionHistoryPageBlockReward = (int)numberParge;
                         labelNoticeCurrentPage.Text = "" + CurrentTransactionHistoryPageBlockReward;
                         CleanTransactionHistory();
                     }
@@ -1662,11 +1662,11 @@ namespace Xenophyte_Wallet
             }
             else if (ClassFormPhase.FormPhase == ClassFormPhaseEnumeration.BlockExplorer)
             {
-                var numberParge = (float) (ClassBlockCache.ListBlock.Count - 1) / MaxBlockPerPage;
+                var numberParge = (float)(ClassBlockCache.ListBlock.Count - 1) / MaxBlockPerPage;
                 numberParge += 0.5f;
-                numberParge = (float) Math.Round(numberParge, 0);
+                numberParge = (float)Math.Round(numberParge, 0);
                 if (numberParge <= 0) numberParge = 1;
-                CurrentBlockExplorerPage = (int) numberParge;
+                CurrentBlockExplorerPage = (int)numberParge;
                 labelNoticeCurrentPage.Text = "" + CurrentBlockExplorerPage;
                 StopUpdateBlockHistory(false, true);
             }
@@ -1743,7 +1743,7 @@ namespace Xenophyte_Wallet
         /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var aboutMenu = new AboutWallet {StartPosition = FormStartPosition.CenterParent};
+            var aboutMenu = new AboutWallet { StartPosition = FormStartPosition.CenterParent };
             aboutMenu.ShowDialog(this);
         }
 
@@ -1754,7 +1754,7 @@ namespace Xenophyte_Wallet
         /// <param name="e"></param>
         private void labelCopyright_Click(object sender, EventArgs e)
         {
-            var aboutMenu = new AboutWallet {StartPosition = FormStartPosition.CenterParent};
+            var aboutMenu = new AboutWallet { StartPosition = FormStartPosition.CenterParent };
             aboutMenu.ShowDialog(this);
         }
 
@@ -1765,7 +1765,7 @@ namespace Xenophyte_Wallet
         /// <param name="e"></param>
         private void linkLabelWebsite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://Xenophyte.com/");
+            Process.Start("https://xenophyte.com/");
         }
 
         /// <summary>
@@ -1816,7 +1816,7 @@ namespace Xenophyte_Wallet
                 }
             }
 
-            BeginInvoke((MethodInvoker) MethodInvoker);
+            BeginInvoke((MethodInvoker)MethodInvoker);
         }
 
         /// <summary>
@@ -1842,7 +1842,7 @@ namespace Xenophyte_Wallet
             }
 
 
-            BeginInvoke((MethodInvoker) MethodInvoker);
+            BeginInvoke((MethodInvoker)MethodInvoker);
         }
 
         /// <summary>
@@ -1939,7 +1939,7 @@ namespace Xenophyte_Wallet
                 }
             }
 
-            BeginInvoke((MethodInvoker) MethodInvoker);
+            BeginInvoke((MethodInvoker)MethodInvoker);
         }
 
         /// <summary>
@@ -1969,7 +1969,7 @@ namespace Xenophyte_Wallet
                     }
                 }
 
-                BeginInvoke((MethodInvoker) MethodInvoker);
+                BeginInvoke((MethodInvoker)MethodInvoker);
             }
             catch
             {
@@ -2001,7 +2001,7 @@ namespace Xenophyte_Wallet
                     }
                 }
 
-                BeginInvoke((MethodInvoker) MethodInvoker);
+                BeginInvoke((MethodInvoker)MethodInvoker);
             }
             catch
             {
@@ -2021,7 +2021,7 @@ namespace Xenophyte_Wallet
                     labelSyncInformation.Text = info;
                 }
 
-                BeginInvoke((MethodInvoker) MethodInvoker);
+                BeginInvoke((MethodInvoker)MethodInvoker);
             }
             catch
             {
@@ -2053,7 +2053,7 @@ namespace Xenophyte_Wallet
                     }
                 }
 
-                BeginInvoke((MethodInvoker) MethodInvoker);
+                BeginInvoke((MethodInvoker)MethodInvoker);
             }
             catch
             {
@@ -2165,7 +2165,7 @@ namespace Xenophyte_Wallet
                         BlockWalletForm.listViewBlockExplorer.Items.Clear();
                     }
 
-                    BeginInvoke((MethodInvoker) MethodInvoker);
+                    BeginInvoke((MethodInvoker)MethodInvoker);
                 }
                 else
                 {
@@ -2177,7 +2177,7 @@ namespace Xenophyte_Wallet
                         BlockWalletForm.listViewBlockExplorer.Items.Clear();
                     }
 
-                    BeginInvoke((MethodInvoker) MethodInvoker);
+                    BeginInvoke((MethodInvoker)MethodInvoker);
                 }
 
                 if (restart)
@@ -2220,7 +2220,7 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentWidth = BaseInterfaceWidth;
 
-                                            var ratioWidth = (float) Width / currentWidth;
+                                            var ratioWidth = (float)Width / currentWidth;
                                             var controlWitdh = ListControlSizeBase[i1].Item1.Width * ratioWidth;
                                             var controlLocationX = ListControlSizeBase[i1].Item2.X * ratioWidth;
                                             float controlLocationY = Controls[i1].Location.Y;
@@ -2238,14 +2238,14 @@ namespace Xenophyte_Wallet
                                                 {
                                                     Controls[i1].Font = new Font(Controls[i1].Font.FontFamily,
                                                         Width * 1.000003f / 100, Controls[i1].Font.Style);
-                                                    Controls[i1].Location = new Point((int) controlLocationX,
-                                                        (int) controlLocationY);
+                                                    Controls[i1].Location = new Point((int)controlLocationX,
+                                                        (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    Controls[i1].Width = (int) controlWitdh;
-                                                    Controls[i1].Location = new Point((int) controlLocationX,
-                                                        (int) controlLocationY);
+                                                    Controls[i1].Width = (int)controlWitdh;
+                                                    Controls[i1].Location = new Point((int)controlLocationX,
+                                                        (int)controlLocationY);
                                                 }
                                             }
                                         }
@@ -2258,7 +2258,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh = ListControlSizeMain[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX = ListControlSizeMain[i1].Item2.X * ratioWidth;
                                                 float controlLocationY = MainWalletForm.Controls[i1].Location.Y;
@@ -2274,13 +2274,13 @@ namespace Xenophyte_Wallet
                                                             MainWalletForm.Width * 1.0014f / 100,
                                                             MainWalletForm.Controls[i1].Font.Style);
                                                     MainWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    MainWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    MainWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     MainWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2292,7 +2292,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizePanelWallet[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2310,13 +2310,13 @@ namespace Xenophyte_Wallet
                                                             panelControlWallet.Width * 1.0014f / 100,
                                                             panelControlWallet.Controls[i1].Font.Style);
                                                     panelControlWallet.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    panelControlWallet.Controls[i1].Width = (int) controlWitdh;
+                                                    panelControlWallet.Controls[i1].Width = (int)controlWitdh;
                                                     panelControlWallet.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2329,7 +2329,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizeOpenWallet[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2347,13 +2347,13 @@ namespace Xenophyte_Wallet
                                                             OpenWalletForm.Width * 1.0014f / 100,
                                                             OpenWalletForm.Controls[i1].Font.Style);
                                                     OpenWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    OpenWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    OpenWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     OpenWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2365,7 +2365,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizeOverview[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2384,13 +2384,13 @@ namespace Xenophyte_Wallet
                                                             OverviewWalletForm.Width * 1.0014f / 100,
                                                             OverviewWalletForm.Controls[i1].Font.Style);
                                                     OverviewWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    OverviewWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    OverviewWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     OverviewWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2411,7 +2411,7 @@ namespace Xenophyte_Wallet
                                                 {
                                                     var currentWidth = BaseInterfaceWidth;
 
-                                                    var ratioWidth = (float) Width / currentWidth;
+                                                    var ratioWidth = (float)Width / currentWidth;
                                                     var controlWitdh =
                                                         ListControlSizeTransaction[i1].Item1.Width * ratioWidth;
                                                     var controlLocationX =
@@ -2432,14 +2432,14 @@ namespace Xenophyte_Wallet
                                                             100,
                                                             TransactionHistoryWalletForm.Controls[i1].Font.Style);
                                                         TransactionHistoryWalletForm.Controls[i1].Location =
-                                                            new Point((int) controlLocationX, (int) controlLocationY);
+                                                            new Point((int)controlLocationX, (int)controlLocationY);
                                                     }
                                                     else
                                                     {
                                                         TransactionHistoryWalletForm.Controls[i1].Width =
-                                                            (int) controlWitdh;
+                                                            (int)controlWitdh;
                                                         TransactionHistoryWalletForm.Controls[i1].Location =
-                                                            new Point((int) controlLocationX, (int) controlLocationY);
+                                                            new Point((int)controlLocationX, (int)controlLocationY);
                                                     }
                                                 }
                                             }
@@ -2453,7 +2453,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizeSendTransaction[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2472,7 +2472,7 @@ namespace Xenophyte_Wallet
                                                         SendTransactionWalletForm.Width * 1.0014f / 100,
                                                         SendTransactionWalletForm.Controls[i1].Font.Style);
                                                     SendTransactionWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
@@ -2480,9 +2480,9 @@ namespace Xenophyte_Wallet
                                                         SendTransactionWalletForm.Controls[i1].Font.FontFamily,
                                                         SendTransactionWalletForm.Width * 1.0014f / 100,
                                                         SendTransactionWalletForm.Controls[i1].Font.Style);
-                                                    SendTransactionWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    SendTransactionWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     SendTransactionWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2494,7 +2494,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizeCreateWallet[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2512,13 +2512,13 @@ namespace Xenophyte_Wallet
                                                             CreateWalletForm.Width * 1.0014f / 100,
                                                             CreateWalletForm.Controls[i1].Font.Style);
                                                     CreateWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    CreateWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    CreateWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     CreateWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2530,7 +2530,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizeRestoreWallet[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2548,13 +2548,13 @@ namespace Xenophyte_Wallet
                                                             RestoreWalletForm.Width * 1.0014f / 100,
                                                             RestoreWalletForm.Controls[i1].Font.Style);
                                                     RestoreWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    RestoreWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    RestoreWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     RestoreWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2566,7 +2566,7 @@ namespace Xenophyte_Wallet
                                                 var i1 = i;
                                                 var currentWidth = BaseInterfaceWidth;
 
-                                                var ratioWidth = (float) Width / currentWidth;
+                                                var ratioWidth = (float)Width / currentWidth;
                                                 var controlWitdh =
                                                     ListControlSizeContactWallet[i1].Item1.Width * ratioWidth;
                                                 var controlLocationX =
@@ -2584,13 +2584,13 @@ namespace Xenophyte_Wallet
                                                             ContactWalletForm.Width * 1.0014f / 100,
                                                             ContactWalletForm.Controls[i1].Font.Style);
                                                     ContactWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                                 else
                                                 {
-                                                    ContactWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    ContactWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     ContactWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2611,15 +2611,15 @@ namespace Xenophyte_Wallet
                                                 {
                                                     var currentWidth = BaseInterfaceWidth;
 
-                                                    var ratioWidth = (float) Width / currentWidth;
+                                                    var ratioWidth = (float)Width / currentWidth;
                                                     var controlWitdh =
                                                         ListControlSizeBlock[i1].Item1.Width * ratioWidth;
                                                     var controlLocationX =
                                                         ListControlSizeBlock[i1].Item2.X * ratioWidth;
                                                     float controlLocationY = BlockWalletForm.Controls[i1].Location.Y;
-                                                    BlockWalletForm.Controls[i1].Width = (int) controlWitdh;
+                                                    BlockWalletForm.Controls[i1].Width = (int)controlWitdh;
                                                     BlockWalletForm.Controls[i1].Location =
-                                                        new Point((int) controlLocationX, (int) controlLocationY);
+                                                        new Point((int)controlLocationX, (int)controlLocationY);
                                                 }
                                             }
 
@@ -2635,13 +2635,13 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh = ListControlSizeBase[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = Controls[i1].Location.X;
                                             var controlLocationY = ListControlSizeBase[i1].Item2.Y * ratioHeight;
-                                            Controls[i1].Height = (int) controlWitdh;
-                                            Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            Controls[i1].Height = (int)controlWitdh;
+                                            Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeMain.Count; i++)
@@ -2651,13 +2651,13 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh = ListControlSizeMain[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = MainWalletForm.Controls[i1].Location.X;
                                             var controlLocationY = ListControlSizeMain[i1].Item2.Y * ratioHeight;
-                                            MainWalletForm.Controls[i1].Height = (int) controlWitdh;
-                                            MainWalletForm.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            MainWalletForm.Controls[i1].Height = (int)controlWitdh;
+                                            MainWalletForm.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizePanelWallet.Count; i++)
@@ -2667,14 +2667,14 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh =
                                                 ListControlSizePanelWallet[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = panelControlWallet.Controls[i1].Location.X;
                                             var controlLocationY = ListControlSizePanelWallet[i1].Item2.Y * ratioHeight;
-                                            panelControlWallet.Controls[i1].Height = (int) controlWitdh;
-                                            panelControlWallet.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            panelControlWallet.Controls[i1].Height = (int)controlWitdh;
+                                            panelControlWallet.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
 
@@ -2685,15 +2685,15 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh =
                                                 ListControlSizeOpenWallet[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = OpenWalletForm.Controls[i1].Location.X;
                                             var controlLocationY =
                                                 ListControlSizeOpenWallet[i1].Item2.Y * ratioHeight;
-                                            OpenWalletForm.Controls[i1].Height = (int) controlWitdh;
-                                            OpenWalletForm.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            OpenWalletForm.Controls[i1].Height = (int)controlWitdh;
+                                            OpenWalletForm.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeOverview.Count; i++)
@@ -2703,13 +2703,13 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh = ListControlSizeOverview[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = OverviewWalletForm.Controls[i1].Location.X;
                                             var controlLocationY = ListControlSizeOverview[i1].Item2.Y * ratioHeight;
-                                            OverviewWalletForm.Controls[i1].Height = (int) controlWitdh;
-                                            OverviewWalletForm.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            OverviewWalletForm.Controls[i1].Height = (int)controlWitdh;
+                                            OverviewWalletForm.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeTransaction.Count; i++)
@@ -2725,16 +2725,16 @@ namespace Xenophyte_Wallet
                                             {
                                                 var currentHeight = BaseInterfaceHeight;
 
-                                                var ratioHeight = (float) Height / currentHeight;
+                                                var ratioHeight = (float)Height / currentHeight;
                                                 var controlWitdh =
                                                     ListControlSizeTransaction[i1].Item1.Height * ratioHeight;
                                                 float controlLocationX =
                                                     TransactionHistoryWalletForm.Controls[i1].Location.X;
                                                 var controlLocationY =
                                                     ListControlSizeTransaction[i1].Item2.Y * ratioHeight;
-                                                TransactionHistoryWalletForm.Controls[i1].Height = (int) controlWitdh;
+                                                TransactionHistoryWalletForm.Controls[i1].Height = (int)controlWitdh;
                                                 TransactionHistoryWalletForm.Controls[i1].Location =
-                                                    new Point((int) controlLocationX, (int) controlLocationY);
+                                                    new Point((int)controlLocationX, (int)controlLocationY);
                                             }
                                         }
 
@@ -2746,15 +2746,15 @@ namespace Xenophyte_Wallet
 
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh =
                                                 ListControlSizeSendTransaction[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = SendTransactionWalletForm.Controls[i1].Location.X;
                                             var controlLocationY =
                                                 ListControlSizeSendTransaction[i1].Item2.Y * ratioHeight;
-                                            SendTransactionWalletForm.Controls[i1].Height = (int) controlWitdh;
+                                            SendTransactionWalletForm.Controls[i1].Height = (int)controlWitdh;
                                             SendTransactionWalletForm.Controls[i1].Location =
-                                                new Point((int) controlLocationX, (int) controlLocationY);
+                                                new Point((int)controlLocationX, (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeCreateWallet.Count; i++)
@@ -2764,15 +2764,15 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh =
                                                 ListControlSizeCreateWallet[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = CreateWalletForm.Controls[i1].Location.X;
                                             var controlLocationY =
                                                 ListControlSizeCreateWallet[i1].Item2.Y * ratioHeight;
-                                            CreateWalletForm.Controls[i1].Height = (int) controlWitdh;
-                                            CreateWalletForm.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            CreateWalletForm.Controls[i1].Height = (int)controlWitdh;
+                                            CreateWalletForm.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeRestoreWallet.Count; i++)
@@ -2782,15 +2782,15 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh =
                                                 ListControlSizeRestoreWallet[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = RestoreWalletForm.Controls[i1].Location.X;
                                             var controlLocationY =
                                                 ListControlSizeRestoreWallet[i1].Item2.Y * ratioHeight;
-                                            RestoreWalletForm.Controls[i1].Height = (int) controlWitdh;
-                                            RestoreWalletForm.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            RestoreWalletForm.Controls[i1].Height = (int)controlWitdh;
+                                            RestoreWalletForm.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeContactWallet.Count; i++)
@@ -2800,15 +2800,15 @@ namespace Xenophyte_Wallet
                                             var i1 = i;
                                             var currentHeight = BaseInterfaceHeight;
 
-                                            var ratioHeight = (float) Height / currentHeight;
+                                            var ratioHeight = (float)Height / currentHeight;
                                             var controlWitdh =
                                                 ListControlSizeContactWallet[i1].Item1.Height * ratioHeight;
                                             float controlLocationX = ContactWalletForm.Controls[i1].Location.X;
                                             var controlLocationY =
                                                 ListControlSizeContactWallet[i1].Item2.Y * ratioHeight;
-                                            ContactWalletForm.Controls[i1].Height = (int) controlWitdh;
-                                            ContactWalletForm.Controls[i1].Location = new Point((int) controlLocationX,
-                                                (int) controlLocationY);
+                                            ContactWalletForm.Controls[i1].Height = (int)controlWitdh;
+                                            ContactWalletForm.Controls[i1].Location = new Point((int)controlLocationX,
+                                                (int)controlLocationY);
                                         }
 
                                 for (var i = 0; i < ListControlSizeBlock.Count; i++)
@@ -2826,14 +2826,14 @@ namespace Xenophyte_Wallet
                                             {
                                                 var currentHeight = BaseInterfaceHeight;
 
-                                                var ratioHeight = (float) Height / currentHeight;
+                                                var ratioHeight = (float)Height / currentHeight;
                                                 var controlWitdh =
                                                     ListControlSizeBlock[i1].Item1.Height * ratioHeight;
                                                 float controlLocationX = BlockWalletForm.Controls[i1].Location.X;
                                                 var controlLocationY = ListControlSizeBlock[i1].Item2.Y * ratioHeight;
-                                                BlockWalletForm.Controls[i1].Height = (int) controlWitdh;
+                                                BlockWalletForm.Controls[i1].Height = (int)controlWitdh;
                                                 BlockWalletForm.Controls[i1].Location =
-                                                    new Point((int) controlLocationX, (int) controlLocationY);
+                                                    new Point((int)controlLocationX, (int)controlLocationY);
                                             }
                                         }
 
@@ -3074,7 +3074,7 @@ namespace Xenophyte_Wallet
                     }
                 }
 
-                BeginInvoke((MethodInvoker) MethodInvoker);
+                BeginInvoke((MethodInvoker)MethodInvoker);
             }
             catch
             {
@@ -3340,7 +3340,7 @@ namespace Xenophyte_Wallet
                     if (!useContactName)
                     {
                         if (!useWalletAddress) // Usually when the user target a transaction hash.
-                            {
+                        {
                             decimal transactionSendNormalCounter = 0;
                             decimal transactionRecvNormalCounter = 0;
                             decimal transactionSendAnonymousCounter = 0;
@@ -3399,7 +3399,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                             Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                    pageNumber = i + 1;
+                                                pageNumber = i + 1;
                                             }
 
                                         break;
@@ -3418,7 +3418,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                        pageNumber = i + 1;
+                                                    pageNumber = i + 1;
                                                 }
                                         }
                                         else if (transactionObject.Value.TransactionWalletAddress == ClassWalletTransactionType.AnonymousTransaction)
@@ -3435,7 +3435,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                        pageNumber = i + 1;
+                                                    pageNumber = i + 1;
                                                 }
                                         }
                                         else
@@ -3452,7 +3452,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                        pageNumber = i + 1;
+                                                    pageNumber = i + 1;
                                                 }
                                         }
 
@@ -3468,7 +3468,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                             Log.WriteLine("Element found: " + ClassBlockCache.ListBlock.ElementAt(elementIdFound).Value.ConcatBlockElement());
 #endif
-                                }
+                            }
                             else
                             {
 
@@ -3502,7 +3502,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                         Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                pageNumber = i + 1;
+                                            pageNumber = i + 1;
                                         }
 
                                     if (pageNumber < 1) pageNumber = 1;
@@ -3516,21 +3516,21 @@ namespace Xenophyte_Wallet
 #if DEBUG
                             Log.WriteLine("Element found: " + ClassBlockCache.ListBlock.ElementAt(elementIdFound).Value.ConcatBlockElement());
 #endif
-                                    }
+                                }
                                 else
                                 {
 #if WINDOWS
-                                        ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
 #if LINUX
                                 MessageBox.Show(this, elementToSearch + " not found.", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
-                                    }
+                                }
                             }
                         }
                         else // Search by wallet address
-                            {
+                        {
                             decimal transactionSendNormalCounter = 0;
                             decimal transactionRecvNormalCounter = 0;
                             decimal transactionSendAnonymousCounter = 0;
@@ -3581,7 +3581,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                             Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                        pageNumber = i + 1;
+                                                    pageNumber = i + 1;
                                                 }
 
                                             break;
@@ -3600,7 +3600,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                            pageNumber = i + 1;
+                                                        pageNumber = i + 1;
                                                     }
                                             }
                                             else if (transactionObject.Value.TransactionWalletAddress == ClassWalletTransactionType.AnonymousTransaction)
@@ -3618,7 +3618,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                            pageNumber = i + 1;
+                                                        pageNumber = i + 1;
                                                     }
                                             }
                                             else
@@ -3635,7 +3635,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                            pageNumber = i + 1;
+                                                        pageNumber = i + 1;
                                                     }
                                             }
 
@@ -3670,7 +3670,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                         Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                pageNumber = i + 1;
+                                            pageNumber = i + 1;
                                         }
 
                                     if (pageNumber < 1) pageNumber = 1;
@@ -3684,13 +3684,13 @@ namespace Xenophyte_Wallet
                             if (!walletAddressTransactionFound)
                             {
 #if WINDOWS
-                                    ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
 #if LINUX
                             MessageBox.Show(this, elementToSearch + " not found.", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
-                                    walletResearchElementForm.Dispose();
+                                walletResearchElementForm.Dispose();
                             }
                             else
                             {
@@ -3699,7 +3699,7 @@ namespace Xenophyte_Wallet
                         }
                     }
                     else // Search by contact name
-                        {
+                    {
                         if (ClassContact.ListContactWallet.ContainsKey(elementToSearch.ToLower()))
                         {
                             decimal transactionSendNormalCounter = 0;
@@ -3756,7 +3756,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                             Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                        pageNumber = i + 1;
+                                                    pageNumber = i + 1;
                                                 }
 
                                             break;
@@ -3776,7 +3776,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                            pageNumber = i + 1;
+                                                        pageNumber = i + 1;
                                                     }
                                             }
                                             else if (transactionObject.Value.TransactionWalletAddress ==
@@ -3795,7 +3795,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                            pageNumber = i + 1;
+                                                        pageNumber = i + 1;
                                                     }
                                             }
                                             else
@@ -3812,7 +3812,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                                 Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                            pageNumber = i + 1;
+                                                        pageNumber = i + 1;
                                                     }
                                             }
 
@@ -3845,7 +3845,7 @@ namespace Xenophyte_Wallet
 #if DEBUG
                                         Console.WriteLine(target + " between: "+ (i * MaxTransactionPerPage) + "/" + ((i + 1) * MaxTransactionPerPage));
 #endif
-                                                pageNumber = i + 1;
+                                            pageNumber = i + 1;
                                         }
 
                                     if (pageNumber < 1) pageNumber = 1;
@@ -3856,13 +3856,13 @@ namespace Xenophyte_Wallet
                             if (!contactTransactionFound)
                             {
 #if WINDOWS
-                                    ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
 #if LINUX
                             MessageBox.Show(this, elementToSearch + " not found.", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
-                                    walletResearchElementForm.Dispose();
+                                walletResearchElementForm.Dispose();
                             }
                             else
                             {
@@ -3873,13 +3873,13 @@ namespace Xenophyte_Wallet
                         {
 
 #if WINDOWS
-                                ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
-                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            ClassFormPhase.MessageBoxInterface(elementToSearch + " not found.", "Not found",
+                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
 #if LINUX
                         MessageBox.Show(this, elementToSearch + " not found.", "Not found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 #endif
-                            }
+                        }
                     }
 
                     UpdateStyles();
@@ -3887,8 +3887,8 @@ namespace Xenophyte_Wallet
                 }
                 catch
                 {
-                        // Ignored.
-                    }
+                    // Ignored.
+                }
             };
             BeginInvoke(invokeResearch);
 
@@ -4030,7 +4030,7 @@ namespace Xenophyte_Wallet
                                         if (ClassWalletTransactionCache.ListTransaction.Count > 0)
                                         {
 
-                                            for(int i = 0; i < totalNormalTransaction; i++)
+                                            for (int i = 0; i < totalNormalTransaction; i++)
                                             {
                                                 if (i < ClassWalletTransactionCache.ListTransactionIndex.Count)
                                                 {

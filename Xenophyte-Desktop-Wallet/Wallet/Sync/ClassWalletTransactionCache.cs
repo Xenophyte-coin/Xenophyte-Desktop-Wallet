@@ -359,9 +359,7 @@ namespace Xenophyte_Wallet.Wallet.Sync
                             ClassWalletNetworkSetting.KeySize); // AES
 
                         if (finalTransactionEncrypted == ClassAlgoErrorEnumeration.AlgoError) // Ban bad remote node.
-                        {
                             errorSyncTransaction = true;
-                        }
                         else
                         {
                             var splitBlockchainHeight = blockchainHeight.Split(new[] { "~" }, StringSplitOptions.None);

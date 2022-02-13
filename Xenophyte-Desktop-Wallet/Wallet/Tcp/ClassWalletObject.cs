@@ -477,7 +477,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 #if DEBUG
                     Log.WriteLine("AwaitPacketProxyConfirmation packet received: " + packet);
 #endif
-                var splitPacket = packet.Split(new[] {ClassConnectorSetting.PacketContentSeperator},
+                var splitPacket = packet.Split(new[] { ClassConnectorSetting.PacketContentSeperator },
                     StringSplitOptions.None);
 
                 if (splitPacket[0] == ClassRemoteNodeCommand.ClassRemoteNodeSendToSeedEnumeration
@@ -490,14 +490,14 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                     if (decryptQuestion != ClassAlgoErrorEnumeration.AlgoError)
                     {
                         var splitDecryptQuestion = decryptQuestion.Split(
-                            new[] {ClassConnectorSetting.PacketContentSeperator}, StringSplitOptions.None);
+                            new[] { ClassConnectorSetting.PacketContentSeperator }, StringSplitOptions.None);
 
                         if (long.TryParse(splitDecryptQuestion[1], out var dateOfQuestion))
                         {
                             if (dateOfQuestion + 60 >= DateTimeOffset.Now.ToUnixTimeSeconds() &&
                                 dateOfQuestion + 60 <= DateTimeOffset.Now.ToUnixTimeSeconds() + 120)
                             {
-                                var splitQuestion = splitDecryptQuestion[0].Split(new[] {" "}, StringSplitOptions.None);
+                                var splitQuestion = splitDecryptQuestion[0].Split(new[] { " " }, StringSplitOptions.None);
 
                                 bool firstNumberChecked = false;
                                 bool mathOperator = false;
@@ -552,7 +552,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
             }
 
             return false;
-            
+
         }
 
         #region Disconnection functions.
@@ -562,7 +562,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         /// </summary>
         public async Task<bool> FullDisconnection(bool manualDisconnection, bool obsolete = false)
         {
-            
+
 
             try
             {
@@ -823,9 +823,9 @@ namespace Xenophyte_Wallet.Wallet.Tcp
             return true;
         }
 
-#endregion
+        #endregion
 
-#region Wallet Connection
+        #region Wallet Connection
 
         /// <summary>
         ///     Disconnect wallet from seed nodes.
@@ -1008,7 +1008,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 
                                         if (packetWallet.Contains(ClassConnectorSetting.PacketSplitSeperator)) // Character separator.
                                         {
-                                            var splitPacket = packetWallet.Split(new[] {ClassConnectorSetting.PacketSplitSeperator}, StringSplitOptions.None);
+                                            var splitPacket = packetWallet.Split(new[] { ClassConnectorSetting.PacketSplitSeperator }, StringSplitOptions.None);
                                             foreach (var packetEach in splitPacket)
                                                 if (!string.IsNullOrEmpty(packetEach))
                                                     if (packetEach.Length > 1)
@@ -1131,10 +1131,10 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 #if DEBUG
                 Log.WriteLine("Handle packet wallet: " + packet);
 #endif
-                var splitPacket = packet.Split(new[] {ClassConnectorSetting.PacketContentSeperator},
+                var splitPacket = packet.Split(new[] { ClassConnectorSetting.PacketContentSeperator },
                     StringSplitOptions.None);
 
-                
+
                 switch (splitPacket[0])
                 {
                     case ClassWalletCommand.ClassWalletReceiveEnumeration.WaitingHandlePacket:
@@ -1308,7 +1308,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             WalletDataCreation = ClassUtils.DecompressData(decryptWalletDataCreation);
 
 
-                            var splitWalletData = WalletDataCreation.Split(new[] {"\n"}, StringSplitOptions.None);
+                            var splitWalletData = WalletDataCreation.Split(new[] { "\n" }, StringSplitOptions.None);
                             var pin = splitPacket[2];
                             var publicKey = splitWalletData[2];
                             var privateKey = splitWalletData[3];
@@ -1335,18 +1335,18 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             var key = publicKey;
                             var key1 = privateKey;
                             var pin1 = pin;
-                            Program.WalletXenophyte.BeginInvoke((MethodInvoker) delegate
-                            {
-                                var createWalletSuccessForm = new CreateWalletSuccessFormWallet
-                                {
-                                    PublicKey = key,
-                                    PrivateKey = key1,
-                                    PinCode = pin1,
-                                    StartPosition = FormStartPosition.CenterParent,
-                                    TopMost = false
-                                };
-                                createWalletSuccessForm.ShowDialog(Program.WalletXenophyte);
-                            });
+                            Program.WalletXenophyte.BeginInvoke((MethodInvoker)delegate
+                           {
+                               var createWalletSuccessForm = new CreateWalletSuccessFormWallet
+                               {
+                                   PublicKey = key,
+                                   PrivateKey = key1,
+                                   PinCode = pin1,
+                                   StartPosition = FormStartPosition.CenterParent,
+                                   TopMost = false
+                               };
+                               createWalletSuccessForm.ShowDialog(Program.WalletXenophyte);
+                           });
                         }
 
                         await Task.Factory.StartNew(async delegate { await FullDisconnection(true); },
@@ -1394,7 +1394,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 
 
                             var splitWalletData =
-                                decryptWalletDataCreation.Split(new[] {"\n"}, StringSplitOptions.None);
+                                decryptWalletDataCreation.Split(new[] { "\n" }, StringSplitOptions.None);
                             var publicKey = splitWalletData[2];
                             var privateKey = splitWalletData[3];
                             var pin = splitWalletData[4];
@@ -1421,18 +1421,18 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             var key = publicKey;
                             var key1 = privateKey;
                             var pin1 = pin;
-                            Program.WalletXenophyte.BeginInvoke((MethodInvoker) delegate
-                            {
-                                var createWalletSuccessForm = new CreateWalletSuccessFormWallet
-                                {
-                                    PublicKey = key,
-                                    PrivateKey = key1,
-                                    PinCode = pin1,
-                                    StartPosition = FormStartPosition.CenterParent,
-                                    TopMost = false
-                                };
-                                createWalletSuccessForm.ShowDialog(Program.WalletXenophyte);
-                            });
+                            Program.WalletXenophyte.BeginInvoke((MethodInvoker)delegate
+                           {
+                               var createWalletSuccessForm = new CreateWalletSuccessFormWallet
+                               {
+                                   PublicKey = key,
+                                   PrivateKey = key1,
+                                   PinCode = pin1,
+                                   StartPosition = FormStartPosition.CenterParent,
+                                   TopMost = false
+                               };
+                               createWalletSuccessForm.ShowDialog(Program.WalletXenophyte);
+                           });
                         }
 
                         await Task.Factory.StartNew(async delegate { await FullDisconnection(true); },
@@ -2155,12 +2155,12 @@ namespace Xenophyte_Wallet.Wallet.Tcp
             return true;
         }
 
-#endregion
+        #endregion
 
 
-#endregion
+        #endregion
 
-#region Desktop Wallet connection in Token Network Mode
+        #region Desktop Wallet connection in Token Network Mode
 
         private Dictionary<string, ClassWalletSeedNodeStats>
             ListOfSeedNodesSpeed; // Key: IP of Seed Node, Value: ClassWalletSeedNodeStats
@@ -2476,7 +2476,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                 {
                                     var walletBalance = responseWallet;
                                     var splitWalletBalance = walletBalance.Split(
-                                        new[] {ClassConnectorSetting.PacketContentSeperator}, StringSplitOptions.None);
+                                        new[] { ClassConnectorSetting.PacketContentSeperator }, StringSplitOptions.None);
                                     if (long.Parse(splitWalletBalance[splitWalletBalance.Length - 1]) + 10 -
                                         DateTimeOffset.Now.ToUnixTimeSeconds() < 60)
                                         if (long.Parse(splitWalletBalance[splitWalletBalance.Length - 1]) + 10 >=
@@ -2614,7 +2614,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             WalletConnect.WalletAddress + WalletConnect.WalletKey + WalletConnect.WalletPassword,
                             ClassWalletNetworkSetting.KeySize);
                         var splitResponseWallet =
-                            responseWallet.Split(new[] {ClassConnectorSetting.PacketContentSeperator},
+                            responseWallet.Split(new[] { ClassConnectorSetting.PacketContentSeperator },
                                 StringSplitOptions.None);
                         if (long.Parse(splitResponseWallet[splitResponseWallet.Length - 1]) + 10 -
                             DateTimeOffset.Now.ToUnixTimeSeconds() < 60)
@@ -2707,7 +2707,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     {
                                         var splitWalletTransaction =
                                             walletTransaction.Split(
-                                                new[] {ClassConnectorSetting.PacketContentSeperator},
+                                                new[] { ClassConnectorSetting.PacketContentSeperator },
                                                 StringSplitOptions.None);
                                         if (long.Parse(splitWalletTransaction[splitWalletTransaction.Length - 1]) + 10 -
                                             DateTimeOffset.Now.ToUnixTimeSeconds() < 60)
@@ -2999,7 +2999,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         {
                             ListOfSeedNodesSpeed.Add(seedNode.Key,
                                 new ClassWalletSeedNodeStats()
-                                    {LastBanError = 0, PingTime = seedNodeResponseTime, TotalError = 0});
+                                { LastBanError = 0, PingTime = seedNodeResponseTime, TotalError = 0 });
                         }
                     }
                     catch (Exception error)
@@ -3010,11 +3010,11 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         if (!ListOfSeedNodesSpeed.ContainsKey(seedNode.Key))
                         {
                             ListOfSeedNodesSpeed.Add(seedNode.Key, new ClassWalletSeedNodeStats()
-                                {
-                                    LastBanError = 0,
-                                    PingTime = ClassConnectorSetting.MaxSeedNodeTimeoutConnect,
-                                    TotalError = 0
-                                }
+                            {
+                                LastBanError = 0,
+                                PingTime = ClassConnectorSetting.MaxSeedNodeTimeoutConnect,
+                                TotalError = 0
+                            }
                             ); // Max delay.
                         }
                     }
@@ -3035,7 +3035,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         Log.WriteLine(seedNode.Key + " response time: " + seedNodeResponseTime + " ms.");
 #endif
                         tmpListOfSeedNodesSpeed.Add(seedNode.Key, new ClassWalletSeedNodeStats()
-                            {LastBanError = 0, PingTime = seedNodeResponseTime, TotalError = 0});
+                        { LastBanError = 0, PingTime = seedNodeResponseTime, TotalError = 0 });
                     }
                     catch (Exception error)
                     {
@@ -3179,7 +3179,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
             try
             {
 
-                var request = (HttpWebRequest) WebRequest.Create(url);
+                var request = (HttpWebRequest)WebRequest.Create(url);
                 request.AutomaticDecompression = DecompressionMethods.GZip;
                 request.ServicePoint.Expect100Continue = false;
                 request.ServicePoint.ConnectionLimit = 65535;
@@ -3188,7 +3188,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                 request.UserAgent = ClassConnectorSetting.CoinName + " Desktop Wallet - " +
                                     Assembly.GetExecutingAssembly().GetName().Version + "R";
                 request.Proxy = null;
-                using (var response = (HttpWebResponse) await request.GetResponseAsync())
+                using (var response = (HttpWebResponse)await request.GetResponseAsync())
                 using (var stream = response.GetResponseStream())
                 using (BufferedStream buffer = new BufferedStream(stream))
                 {
@@ -3613,7 +3613,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                                     if (packetReceived.Contains(ClassConnectorSetting.PacketSplitSeperator))
                                                     {
                                                         var splitPacketReceived =
-                                                            packetReceived.Split(new[] {ClassConnectorSetting.PacketSplitSeperator}, StringSplitOptions.None);
+                                                            packetReceived.Split(new[] { ClassConnectorSetting.PacketSplitSeperator }, StringSplitOptions.None);
                                                         foreach (var packet in splitPacketReceived)
                                                             if (!string.IsNullOrEmpty(packet))
                                                                 await HandlePacketRemoteNodeSyncAsync(packet, node);
@@ -3824,7 +3824,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                 {
                     if (!string.IsNullOrEmpty(packet))
                     {
-                        var splitPacket = packet.Split(new[] {ClassConnectorSetting.PacketContentSeperator},
+                        var splitPacket = packet.Split(new[] { ClassConnectorSetting.PacketContentSeperator },
                             StringSplitOptions.None);
 
                         if (splitPacket.Length > 0)
@@ -3837,7 +3837,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeCoinMaxSupply:
 
-#region Receive the current max coin supply of the network.
+                                    #region Receive the current max coin supply of the network.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -3857,13 +3857,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
                                     CoinMaxSupply = splitPacket[1];
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeCoinCirculating:
 
-#region Receive the current amount of coins circulating on the network.
+                                    #region Receive the current amount of coins circulating on the network.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -3883,13 +3883,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
                                     CoinCirculating = splitPacket[1];
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeCurrentDifficulty:
 
-#region Receive the current mining difficulty of the network.
+                                    #region Receive the current mining difficulty of the network.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -3909,13 +3909,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
                                     NetworkDifficulty = splitPacket[1];
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeCurrentRate:
 
-#region Receive the current mining hashrate of the network.
+                                    #region Receive the current mining hashrate of the network.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -3935,13 +3935,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
                                     NetworkHashrate = splitPacket[1];
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeTotalBlockMined:
 
-#region Receive the total amount of blocks mined to sync.
+                                    #region Receive the total amount of blocks mined to sync.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -4063,13 +4063,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                         }
                                     }
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeTotalFee:
 
-#region Receive the total amount of fee accumulated in the network.
+                                    #region Receive the total amount of fee accumulated in the network.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -4089,13 +4089,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
                                     TotalFee = splitPacket[1];
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeTotalPendingTransaction:
 
-#region Receive the total amount of transaction in pending on the network.
+                                    #region Receive the total amount of transaction in pending on the network.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -4116,13 +4116,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     if (int.TryParse(splitPacket[1], out var totalPendingTransaction))
                                         RemoteNodeTotalPendingTransactionInNetwork = totalPendingTransaction;
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .WalletYourNumberTransaction:
 
-#region Receive total transaction to sync.
+                                    #region Receive total transaction to sync.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -4322,13 +4322,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                         }
                                     }
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .WalletYourAnonymityNumberTransaction:
 
-#region Receive total anonymous transaction to sync.
+                                    #region Receive total anonymous transaction to sync.
 
                                     if (Program.WalletXenophyte.WalletSyncMode ==
                                         ClassWalletSyncMode.WALLET_SYNC_PUBLIC_NODE)
@@ -4502,13 +4502,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                         }
                                     }
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .SendRemoteNodeLastBlockFoundTimestamp:
 
-#region Receive last block found date.
+                                    #region Receive last block found date.
 
 #if DEBUG
                                     Log.WriteLine("Last block found date: " + splitPacket[1]
@@ -4547,7 +4547,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                         LastBlockFound = "" + dateTime;
                                     }
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
@@ -4560,7 +4560,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     {
                                         if (!ClassPeerList.GetPeerTrustStatus(node))
                                         {
-                                            var splitBlock = splitPacket[1].Split(new[] {"#"}, StringSplitOptions.None);
+                                            var splitBlock = splitPacket[1].Split(new[] { "#" }, StringSplitOptions.None);
                                             if (long.TryParse(splitBlock[0], out _))
                                             {
                                                 if (await CheckRemoteNodeInformationByCompareAsync(
@@ -4584,7 +4584,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 
                                     }
 
-#region Receive block sync by ID.
+                                    #region Receive block sync by ID.
 
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
 
@@ -4601,7 +4601,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                         .Replace(
                                             ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                                 .SendRemoteNodeBlockPerId, "")
-                                        .Split(new[] {"#"}, StringSplitOptions.None);
+                                        .Split(new[] { "#" }, StringSplitOptions.None);
 
                                     if (!ClassBlockCache.ListBlock.ContainsKey(blockLine[1]))
                                     {
@@ -4626,13 +4626,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                         InReceiveBlock = false;
                                     }
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .WalletTransactionPerId:
 
-#region Receive transaction by ID.
+                                    #region Receive transaction by ID.
 
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
 
@@ -4661,13 +4661,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     await ClassWalletTransactionCache.AddWalletTransactionAsync(splitPacket[1],
                                         node);
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
                                     .WalletAnonymityTransactionPerId:
 
-#region Receive anonymous transaction sync by ID.
+                                    #region Receive anonymous transaction sync by ID.
 
                                     LastRemoteNodePacketReceived = ClassUtils.DateUnixTimeNowSecond();
 
@@ -4697,7 +4697,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                     await ClassWalletTransactionAnonymityCache.AddWalletTransactionAsync(
                                         splitPacket[1], node);
 
-#endregion
+                                    #endregion
 
                                     break;
                                 case ClassRemoteNodeCommandForWallet.RemoteNodeRecvPacketEnumeration
@@ -4861,6 +4861,6 @@ namespace Xenophyte_Wallet.Wallet.Tcp
             }
         }
 
-#endregion
+        #endregion
     }
 }

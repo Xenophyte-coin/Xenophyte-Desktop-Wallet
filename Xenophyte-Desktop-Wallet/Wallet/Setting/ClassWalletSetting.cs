@@ -71,10 +71,7 @@ namespace Xenophyte_Wallet.Wallet.Setting
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
-                {
                     jsonSetting += line;
-                }
-
             }
 
             try

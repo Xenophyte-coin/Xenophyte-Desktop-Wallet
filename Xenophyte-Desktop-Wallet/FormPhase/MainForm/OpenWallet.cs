@@ -42,10 +42,12 @@ namespace Xenophyte_Wallet.FormPhase.MainForm
             var openWalletFile = new OpenFileDialog
             {
                 InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
-                Filter = "Xenophyte Wallet (*.xeno) | *.xeno",
+                Filter = "Xiropht Wallet (*.xir) | *.xir | Xenophyte Wallet (*.xeno) | *.xeno",
                 FilterIndex = 2,
                 DereferenceLinks = false
             };
+
+
             if (openWalletFile.ShowDialog() == DialogResult.OK)
             {
                 var threadReadWalletFileData = new Thread(delegate()
