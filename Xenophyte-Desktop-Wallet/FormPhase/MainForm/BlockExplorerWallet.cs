@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Xenophyte_Connector_All.Setting;

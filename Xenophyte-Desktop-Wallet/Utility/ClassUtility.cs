@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,7 +92,7 @@ namespace Xenophyte_Wallet.Utility
         /// Test tcp connect.
         /// </summary>
         /// <returns></returns>
-        public static bool TestTcpHost(string host, int port, int timeout)
+        public static bool TestTcpHost(IPAddress host, int port, int timeout)
         {
             bool status = false;
             Task taskCheckSeedNode = Task.Run(async () => status = await CheckTcp.CheckTcpClientAsync(host, port));

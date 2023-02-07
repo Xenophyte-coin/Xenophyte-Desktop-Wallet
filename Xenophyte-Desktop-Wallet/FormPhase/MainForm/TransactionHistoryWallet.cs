@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -1691,8 +1693,8 @@ namespace Xenophyte_Wallet.FormPhase.MainForm
                                                     {
                                                         if (walletXenophyte.ClassWalletObject.ListWalletConnectToRemoteNode.Count > 0)
                                                         {
-                                                            string node = walletXenophyte.ClassWalletObject.ListWalletConnectToRemoteNode[0].RemoteNodeHost;
-                                                            if (!string.IsNullOrEmpty(node))
+                                                            var node = walletXenophyte.ClassWalletObject.ListWalletConnectToRemoteNode[0].RemoteNodeHost;
+                                                            if (node?.AddressFamily == AddressFamily.InterNetwork || node?.AddressFamily == AddressFamily.InterNetworkV6)
                                                             {
                                                                 if (!walletXenophyte.ClassWalletObject.InSyncBlock)
                                                                 {
@@ -1707,11 +1709,12 @@ namespace Xenophyte_Wallet.FormPhase.MainForm
                                                                             }
                                                                         }
                                                                     }
+
                                                                     if (ClassConnectorSetting.SeedNodeIp.ContainsKey(node))
                                                                     {
                                                                         walletXenophyte.UpdateLabelSyncInformation(
                                                                             "Your wallet currently sync with the Seed Node IP: " +
-                                                                            node +
+                                                                            node.ToString() +
                                                                             " Country: " +
                                                                             ClassConnectorSetting.SeedNodeIp[node].Item1);
                                                                     }
@@ -1719,7 +1722,7 @@ namespace Xenophyte_Wallet.FormPhase.MainForm
                                                                     {
                                                                         walletXenophyte.UpdateLabelSyncInformation(
                                                                             "Your wallet currently sync with the Node IP: " +
-                                                                            node);
+                                                                            node.ToString());
                                                                     }
                                                                 }
                                                                 else

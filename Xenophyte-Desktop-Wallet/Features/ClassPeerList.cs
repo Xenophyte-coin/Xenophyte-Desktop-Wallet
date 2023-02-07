@@ -11,7 +11,7 @@ namespace Xenophyte_Wallet.Features
 {
     public class ClassPeerObject
     {
-        public string peer_host = string.Empty;
+        public IPAddress peer_host;
         public long peer_last_ban;
         public bool peer_status;
         public int peer_total_disconnect;
@@ -30,7 +30,7 @@ namespace Xenophyte_Wallet.Features
         public static int PeerMaxTimeTrust = 30;
         public static int PeerTrustMinimumValue = 50;
         public static bool PeerEnableTrustSystem = false;
-        public static Dictionary<string, ClassPeerObject> PeerList = new Dictionary<string, ClassPeerObject>();
+        public static Dictionary<IPAddress, ClassPeerObject> PeerList = new Dictionary<IPAddress, ClassPeerObject>();
 
         /// <summary>
         ///     Load peer list.
@@ -46,11 +46,10 @@ namespace Xenophyte_Wallet.Features
                         try
                         {
                             var peerObject = JsonConvert.DeserializeObject<ClassPeerObject>(line);
-                            if (IPAddress.TryParse(peerObject.peer_host, out _))
-                            {
-                                if (!PeerList.ContainsKey(peerObject.peer_host))
-                                    PeerList.Add(peerObject.peer_host, peerObject);
-                            }
+
+                            if (!PeerList.ContainsKey(peerObject.peer_host))
+                                PeerList.Add(peerObject.peer_host, peerObject);
+
                         }
                         catch
                         {
@@ -64,7 +63,7 @@ namespace Xenophyte_Wallet.Features
         ///     Include a new peer.
         /// </summary>
         /// <param name="peerHost"></param>
-        public static bool IncludeNewPeer(string peerHost)
+        public static bool IncludeNewPeer(IPAddress peerHost)
         {
             try
             {
@@ -83,7 +82,7 @@ namespace Xenophyte_Wallet.Features
         ///     Ban a peer, insert it if he is a new peer.
         /// </summary>
         /// <param name="peerHost"></param>
-        public static void BanPeer(string peerHost)
+        public static void BanPeer(IPAddress peerHost)
         {
             if (!ClassConnectorSetting.SeedNodeIp.ContainsKey(peerHost))
             {
@@ -115,7 +114,7 @@ namespace Xenophyte_Wallet.Features
         /// </summary>
         /// <param name="peerHost"></param>
         /// <returns></returns>
-        public static bool GetPeerStatus(string peerHost)
+        public static bool GetPeerStatus(IPAddress peerHost)
         {
             if (!PeerList.ContainsKey(peerHost))
             {
@@ -143,7 +142,7 @@ namespace Xenophyte_Wallet.Features
         /// </summary>
         /// <param name="peerHost"></param>
         /// <returns></returns>
-        public static bool GetPeerProxyStatus(string peerHost)
+        public static bool GetPeerProxyStatus(IPAddress peerHost)
         {
             if (!PeerList.ContainsKey(peerHost))
             {
@@ -172,7 +171,7 @@ namespace Xenophyte_Wallet.Features
         /// Ban proxy peer.
         /// </summary>
         /// <param name="peerHost"></param>
-        public static void BanProxyPeer(string peerHost)
+        public static void BanProxyPeer(IPAddress peerHost)
         {
             if (!ClassConnectorSetting.SeedNodeIp.ContainsKey(peerHost))
             {
@@ -198,7 +197,7 @@ namespace Xenophyte_Wallet.Features
         ///     Increment total disconnect of peer host.
         /// </summary>
         /// <param name="peerHost"></param>
-        public static void IncrementPeerDisconnect(string peerHost)
+        public static void IncrementPeerDisconnect(IPAddress peerHost)
         {
             if (!PeerList.ContainsKey(peerHost)) IncludeNewPeer(peerHost);
             PeerList[peerHost].peer_total_disconnect++;
@@ -217,7 +216,7 @@ namespace Xenophyte_Wallet.Features
         /// Increment trust value of the peer.
         /// </summary>
         /// <param name="peerHost"></param>
-        public static void IncrementPeerTrustPoint(string peerHost)
+        public static void IncrementPeerTrustPoint(IPAddress peerHost)
         {
             if (!PeerList.ContainsKey(peerHost)) IncludeNewPeer(peerHost);
             if (PeerList[peerHost].peer_trust_value < PeerMaxTimeTrust)
@@ -238,7 +237,7 @@ namespace Xenophyte_Wallet.Features
         /// </summary>
         /// <param name="peerHost"></param>
         /// <returns></returns>
-        public static bool GetPeerTrustStatus(string peerHost)
+        public static bool GetPeerTrustStatus(IPAddress peerHost)
         {
             if (ClassConnectorSetting.SeedNodeIp.ContainsKey(peerHost))
             {

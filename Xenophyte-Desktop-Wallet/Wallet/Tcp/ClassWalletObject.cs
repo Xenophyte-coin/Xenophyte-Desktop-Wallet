@@ -99,8 +99,8 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         public bool InSyncTransactionAnonymity;
         public string LastBlockFound;
         public long LastRemoteNodePacketReceived;
-        public Dictionary<string, long> ListRemoteNodeBanned = new Dictionary<string, long>();
-        public Dictionary<string, long> ListRemoteNodeTotalDisconnect = new Dictionary<string, long>();
+        public Dictionary<IPAddress, long> ListRemoteNodeBanned = new Dictionary<IPAddress, long>();
+        public Dictionary<IPAddress, long> ListRemoteNodeTotalDisconnect = new Dictionary<IPAddress, long>();
         public List<ClassWalletConnectToRemoteNode> ListWalletConnectToRemoteNode;
         public string NetworkDifficulty;
         public string NetworkHashrate;
@@ -234,7 +234,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                     if (Program.WalletXenophyte.WalletSyncMode == ClassWalletSyncMode.WALLET_SYNC_DEFAULT ||
                         !Program.WalletXenophyte.WalletEnableProxyMode)
                     {
-                        if (!await SeedNodeConnectorWallet.StartConnectToSeedAsync(string.Empty)
+                        if (!await SeedNodeConnectorWallet.StartConnectToSeedAsync(null)
                         )
                         {
 #if DEBUG
@@ -325,7 +325,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                                     false))
                                                 {
                                                     Program.WalletXenophyte.UpdateLabelSyncInformation(
-                                                        "Currently on check Remote Node Proxy: " + peer.Key + "...");
+                                                        "Currently on check Remote Node Proxy: " + peer.Key.ToString() + "...");
 
 
                                                     Task<bool> waitConfirmation = AwaitPacketProxyConfirmation();
@@ -335,7 +335,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                                     if (!waitConfirmation.Result)
                                                     {
                                                         Program.WalletXenophyte.UpdateLabelSyncInformation(
-                                                            "Check Remote Node Proxy: " + peer.Key +
+                                                            "Check Remote Node Proxy: " + peer.Key.ToString() +
                                                             " failed.");
                                                         ClassPeerList.BanProxyPeer(peer.Key);
                                                     }
@@ -354,7 +354,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 
                         if (!success)
                         {
-                            if (!await SeedNodeConnectorWallet.StartConnectToSeedAsync(string.Empty)
+                            if (!await SeedNodeConnectorWallet.StartConnectToSeedAsync(null)
                             )
                             {
 #if DEBUG
@@ -370,7 +370,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                              Program.WalletXenophyte.WalletEnableProxyMode)
                     {
                         if (await SeedNodeConnectorWallet.StartConnectToSeedAsync(
-                            Program.WalletXenophyte.WalletSyncHostname,
+                            IPAddress.Parse(Program.WalletXenophyte.WalletSyncHostname),
                             ClassConnectorSetting.RemoteNodePort, false,
                             ClassConnectorSetting.MaxTimeoutConnectRemoteNode)
                         )
@@ -411,7 +411,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
             }
             else
             {
-                if (!await SeedNodeConnectorWallet.StartConnectToSeedAsync(string.Empty)
+                if (!await SeedNodeConnectorWallet.StartConnectToSeedAsync(null)
                 )
                 {
 #if DEBUG
@@ -1433,6 +1433,9 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                };
                                createWalletSuccessForm.ShowDialog(Program.WalletXenophyte);
                            });
+
+                            Program.WalletXenophyte.ShowWalletAddressQRCode(splitWalletData[0]);
+
                         }
 
                         await Task.Factory.StartNew(async delegate { await FullDisconnection(true); },
@@ -1528,6 +1531,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 #if DEBUG
                         Log.WriteLine("Wallet Anonymity id: " + WalletConnect.WalletIdAnonymity);
 #endif
+                        Program.WalletXenophyte.ShowWalletAddressQRCode(WalletConnect.WalletAddress);
 
                         break;
                     case ClassWalletCommand.ClassWalletReceiveEnumeration.StatsPhase:
@@ -2162,7 +2166,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 
         #region Desktop Wallet connection in Token Network Mode
 
-        private Dictionary<string, ClassWalletSeedNodeStats>
+        private Dictionary<IPAddress, ClassWalletSeedNodeStats>
             ListOfSeedNodesSpeed; // Key: IP of Seed Node, Value: ClassWalletSeedNodeStats
 
         private const string HttpPacketError = "ERROR";
@@ -2504,6 +2508,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                     }
                     else
                     {
+
                         ListOfSeedNodesSpeed[seedNodeSelected.Item2].TotalError++;
                         if (ListOfSeedNodesSpeed[seedNodeSelected.Item2].TotalError >= WalletMaxSeedNodeError)
                         {
@@ -2589,7 +2594,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         /// </summary>
         /// <param name="getSeedNodeRandom"></param>
         /// <returns></returns>
-        private async Task<string> GetWalletTokenAsync(string getSeedNodeRandom)
+        private async Task<string> GetWalletTokenAsync(IPAddress getSeedNodeRandom)
         {
             var encryptedRequest = ClassRpcWalletCommand.TokenAsk + "|empty-token|" +
                                    (DateTimeOffset.Now.ToUnixTimeSeconds() + 1).ToString("F0");
@@ -2597,7 +2602,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                 WalletConnect.WalletAddress + WalletConnect.WalletKey + WalletConnect.WalletPassword,
                 ClassWalletNetworkSetting.KeySize);
             var responseWallet = await ProceedTokenRequestHttpAsync(
-                "http://" + getSeedNodeRandom + ":" + ClassConnectorSetting.SeedNodeTokenPort + "/" +
+                "http://" + getSeedNodeRandom.ToString() + ":" + ClassConnectorSetting.SeedNodeTokenPort + "/" +
                 ClassConnectorSettingEnumeration.WalletTokenType + ClassConnectorSetting.PacketContentSeperator +
                 WalletConnect.WalletAddress + ClassConnectorSetting.PacketContentSeperator +
                 encryptedRequest);
@@ -2977,13 +2982,14 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         ///     Get Seed Node list sorted by the faster to the slowest one.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<string, ClassWalletSeedNodeStats> GetSeedNodeSpeedList()
+        public Dictionary<IPAddress, ClassWalletSeedNodeStats> GetSeedNodeSpeedList()
         {
-            if (ListOfSeedNodesSpeed == null) ListOfSeedNodesSpeed = new Dictionary<string, ClassWalletSeedNodeStats>();
+            if (ListOfSeedNodesSpeed == null) ListOfSeedNodesSpeed = new Dictionary<IPAddress, ClassWalletSeedNodeStats>();
 
             if (ListOfSeedNodesSpeed.Count == 0)
             {
                 foreach (var seedNode in ClassConnectorSetting.SeedNodeIp.ToArray())
+                {
                     try
                     {
                         var seedNodeResponseTime = -1;
@@ -2992,6 +2998,15 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         taskCheckSeedNode.Wait(ClassConnectorSetting.MaxPingDelay);
                         if (seedNodeResponseTime == -1)
                             seedNodeResponseTime = ClassConnectorSetting.MaxSeedNodeTimeoutConnect;
+                        else
+                        {
+                            if (seedNode.Key.AddressFamily  == AddressFamily.InterNetworkV6 
+                                && ClassConnectorSetting.PriorityToIpV6)
+                            {
+                                seedNodeResponseTime -= ClassConnectorSetting.PriorityIpV6ElapsedMillisecond;
+                            }
+                        }
+                           
 #if DEBUG
                         Log.WriteLine(seedNode.Key + " response time: " + seedNodeResponseTime + " ms.");
 #endif
@@ -3008,6 +3023,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         Log.WriteLine("GetSeedNodeSpeedList exception: " + error.Message);
 #endif
                         if (!ListOfSeedNodesSpeed.ContainsKey(seedNode.Key))
+
                         {
                             ListOfSeedNodesSpeed.Add(seedNode.Key, new ClassWalletSeedNodeStats()
                             {
@@ -3018,11 +3034,13 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             ); // Max delay.
                         }
                     }
+                }
             }
             else if (ListOfSeedNodesSpeed.Count != ClassConnectorSetting.SeedNodeIp.Count)
             {
-                var tmpListOfSeedNodesSpeed = new Dictionary<string, ClassWalletSeedNodeStats>();
+                var tmpListOfSeedNodesSpeed = new Dictionary<IPAddress, ClassWalletSeedNodeStats>();
                 foreach (var seedNode in ClassConnectorSetting.SeedNodeIp.ToArray())
+                {
                     try
                     {
                         var seedNodeResponseTime = -1;
@@ -3031,6 +3049,11 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         taskCheckSeedNode.Wait(ClassConnectorSetting.MaxPingDelay);
                         if (seedNodeResponseTime == -1)
                             seedNodeResponseTime = ClassConnectorSetting.MaxSeedNodeTimeoutConnect;
+
+                        if (seedNode.Key.AddressFamily == AddressFamily.InterNetworkV6 && ClassConnectorSetting.PriorityToIpV6)
+                        {
+                            seedNodeResponseTime -= ClassConnectorSetting.PriorityIpV6ElapsedMillisecond;
+                        }
 #if DEBUG
                         Log.WriteLine(seedNode.Key + " response time: " + seedNodeResponseTime + " ms.");
 #endif
@@ -3049,7 +3072,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             TotalError = 0
                         }); // Max delay.
                     }
-
+                }
                 ListOfSeedNodesSpeed = tmpListOfSeedNodesSpeed;
             }
 
@@ -3060,9 +3083,9 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         ///     Return a seed node functional
         /// </summary>
         /// <returns></returns>
-        private Tuple<bool, string> GetSeedNodeAlive()
+        private Tuple<bool, IPAddress> GetSeedNodeAlive()
         {
-            var getSeedNodeRandom = string.Empty;
+            IPAddress getSeedNodeRandom = null;
             var seedNodeSelected = false;
             foreach (var seedNode in GetSeedNodeSpeedList().ToArray())
             {
@@ -3087,12 +3110,16 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         seedNodeSelected =
                             await CheckTcp.CheckTcpClientAsync(seedNode.Key, ClassConnectorSetting.SeedNodeTokenPort));
                     taskCheckSeedNode.Wait(ClassConnectorSetting.MaxTimeoutConnect);
+                 
+
+                    
+                    
                     if (seedNodeSelected) break;
                 }
 
             }
 
-            return new Tuple<bool, string>(seedNodeSelected, getSeedNodeRandom);
+            return new Tuple<bool, IPAddress>(seedNodeSelected, getSeedNodeRandom);
         }
 
         /// <summary>
@@ -3227,7 +3254,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                             {
                                 if (_classTokenRemoteNode.remote_node_list.Count > 0)
                                 {
-                                    var remoteNodeAlive = string.Empty;
+                                    IPAddress remoteNodeAlive = null;
 
                                     foreach (var remoteNode in _classTokenRemoteNode.remote_node_list)
                                     {
@@ -3300,7 +3327,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                 var peerNodeSelected = false;
                                 if (ClassPeerList.PeerList.Count > 0)
                                 {
-                                    var peerNodeAlive = string.Empty;
+                                    IPAddress peerNodeAlive = null;
                                     foreach (var peerNode in ClassPeerList.PeerList.ToArray())
                                     {
                                         if (!peerNodeSelected)
@@ -3423,7 +3450,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                 Program.WalletXenophyte.WalletSyncHostname);
 
                             if (!await ConnectToRemoteNodeSyncAsync(
-                                Program.WalletXenophyte.WalletSyncHostname))
+                                IPAddress.Parse(Program.WalletXenophyte.WalletSyncHostname)))
                             {
                                 await DisconnectRemoteNodeTokenSync();
                                 WalletOnUseSync = false;
@@ -3550,7 +3577,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         /// </summary>
         /// <param name="nodeTarget"></param>
         /// <returns></returns>
-        private async Task<bool> ConnectToRemoteNodeSyncAsync(string nodeTarget)
+        private async Task<bool> ConnectToRemoteNodeSyncAsync(IPAddress nodeTarget)
         {
             try
             {
@@ -3595,7 +3622,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                         var i1 = i;
                         await Task.Factory.StartNew(async () =>
                             {
-                                string node = ListWalletConnectToRemoteNode[i1].RemoteNodeHost;
+                                var node = ListWalletConnectToRemoteNode[i1].RemoteNodeHost;
                                 while (!WalletClosed && WalletOnUseSync)
                                 {
                                     try
@@ -3817,7 +3844,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
         /// <param name="packet"></param>
         /// <param name="node"></param>
         /// <returns></returns>
-        private async Task<bool> HandlePacketRemoteNodeSyncAsync(string packet, string node)
+        private async Task<bool> HandlePacketRemoteNodeSyncAsync(string packet, IPAddress node)
         {
             if (!WalletClosed && WalletOnUseSync)
                 try
@@ -4174,8 +4201,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
 
                                                 if (totalTransactionInWallet > TotalTransactionInSync)
                                                 {
-                                                    if (ClassConnectorSetting.SeedNodeIp.ContainsKey(
-                                                        ListWalletConnectToRemoteNode[0].RemoteNodeHost))
+                                                    if (ClassConnectorSetting.SeedNodeIp.ContainsKey(ListWalletConnectToRemoteNode[0].RemoteNodeHost))
                                                     {
                                                         ClassWalletTransactionCache.RemoveWalletCache(WalletConnect
                                                             .WalletAddress);
@@ -4266,8 +4292,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                                                                     if (!WalletClosed)
                                                                                         if (!ClassConnectorSetting
                                                                                             .SeedNodeIp
-                                                                                            .ContainsKey(
-                                                                                                ListWalletConnectToRemoteNode
+                                                                                            .ContainsKey(ListWalletConnectToRemoteNode
                                                                                                         [8]
                                                                                                     .RemoteNodeHost))
                                                                                         {
@@ -4462,8 +4487,7 @@ namespace Xenophyte_Wallet.Wallet.Tcp
                                                                             if (!WalletClosed)
                                                                             {
                                                                                 if (!ClassConnectorSetting.SeedNodeIp
-                                                                                    .ContainsKey(
-                                                                                        node))
+                                                                                    .ContainsKey(node))
                                                                                 {
 
                                                                                     ClassPeerList

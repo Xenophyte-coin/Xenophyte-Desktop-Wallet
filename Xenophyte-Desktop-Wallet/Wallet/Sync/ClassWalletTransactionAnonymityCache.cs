@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Xenophyte_Connector_All.Remote;
@@ -304,7 +305,7 @@ namespace Xenophyte_Wallet.Wallet.Sync
         ///     Add transaction to the list.
         /// </summary>
         /// <param name="transaction"></param>
-        public static async Task AddWalletTransactionAsync(string transaction, string node)
+        public static async Task AddWalletTransactionAsync(string transaction, IPAddress node)
         {
 #if DEBUG
                 Log.WriteLine("Wallet transaction history received: " + transaction

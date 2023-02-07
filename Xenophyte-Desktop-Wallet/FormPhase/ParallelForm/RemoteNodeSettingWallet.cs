@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Windows.Forms;
 using MetroFramework;
 using Xenophyte_Wallet.Features;
@@ -135,7 +136,7 @@ namespace Xenophyte_Wallet.FormPhase.ParallelForm
             {
                 try
                 {
-                    string peer = senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    IPAddress peer = IPAddress.Parse(senderGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
                     if (ClassPeerList.PeerList.ContainsKey(peer))
                     {
                         ClassPeerList.PeerList.Remove(peer);

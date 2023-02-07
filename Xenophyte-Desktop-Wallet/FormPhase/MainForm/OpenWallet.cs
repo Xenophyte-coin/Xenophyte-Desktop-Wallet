@@ -42,7 +42,7 @@ namespace Xenophyte_Wallet.FormPhase.MainForm
             var openWalletFile = new OpenFileDialog
             {
                 InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
-                Filter = "Xiropht Wallet (*.xir) | *.xir | Xenophyte Wallet (*.xeno) | *.xeno",
+                Filter = "Xiropht Wallet|*.xir|Xenophyte Wallet|*.xeno",
                 FilterIndex = 2,
                 DereferenceLinks = false
             };

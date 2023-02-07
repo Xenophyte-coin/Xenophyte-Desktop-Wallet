@@ -15,9 +15,6 @@ using System.Windows.Forms;
 using Xenophyte_Connector_All.Setting;
 using Xenophyte_Connector_All.Utils;
 using Xenophyte_Connector_All.Wallet;
-using Xenophyte_Connector_All.Setting;
-using Xenophyte_Connector_All.Utils;
-using Xenophyte_Connector_All.Wallet;
 using Xenophyte_Wallet.Features;
 using Xenophyte_Wallet.FormPhase;
 using Xenophyte_Wallet.FormPhase.MainForm;
@@ -441,6 +438,9 @@ namespace Xenophyte_Wallet
         /// </summary>
         private void UpdateNetworkStatsLabel()
         {
+
+          ;
+
             if (!string.IsNullOrEmpty(ClassWalletObject.TotalBlockMined) &&
                 !string.IsNullOrEmpty(ClassWalletObject.CoinCirculating) &&
                 !string.IsNullOrEmpty(ClassWalletObject.CoinMaxSupply) &&
