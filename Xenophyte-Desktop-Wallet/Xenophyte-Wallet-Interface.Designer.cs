@@ -1,4 +1,5 @@
-﻿using Xenophyte_Wallet.FormCustom;
+﻿using System;
+using Xenophyte_Wallet.FormCustom;
 
 namespace Xenophyte_Wallet
 {
@@ -410,7 +411,7 @@ namespace Xenophyte_Wallet
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(259, 15);
             this.labelCopyright.TabIndex = 12;
-            this.labelCopyright.Text = "Copyright © 2021 Xenophyte developer.";
+            this.labelCopyright.Text = "Copyright © "+DateTime.Now.Year+" Xenophyte developer.";
             this.labelCopyright.Click += new System.EventHandler(this.labelCopyright_Click);
             // 
             // linkLabelWebsite
