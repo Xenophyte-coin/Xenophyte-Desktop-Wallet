@@ -1142,6 +1142,9 @@ namespace Xenophyte_Wallet
                 ContactWalletForm.GetListControl();
                 ResizeWalletInterface();
             }
+            foreach(Control control in Controls)
+                control.Update();
+
             UpdateStyles();
         }
 
